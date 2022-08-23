@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-23T17:05:26.602Z" agent="5.0 (Windows)" etag="PwYcM2R46I2rNEpRWG3C" version="20.0.4" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-08-23T17:06:16.732Z" agent="5.0 (Windows)" etag="oyZz1oskziG1CppOjxgg" version="20.0.4" type="github" pages="3">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="use case">
     <mxGraphModel dx="868" dy="593" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -326,7 +326,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="1c_98SEK9JhJons6He7b" name="apk">
-    <mxGraphModel dx="1335" dy="912" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="964" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -366,7 +366,7 @@
         <mxCell id="ytNZYx9ELmWF6Es8LpvB-13" value="crud product" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="470" y="180" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ytNZYx9ELmWF6Es8LpvB-14" value="crud product" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ytNZYx9ELmWF6Es8LpvB-14" value="Liste info" style="shape=singleArrow;direction=east;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="630" y="190" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ytNZYx9ELmWF6Es8LpvB-15" value="enable qte" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
