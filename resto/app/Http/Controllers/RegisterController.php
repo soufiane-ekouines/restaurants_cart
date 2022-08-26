@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Role_user;
 use App\Models\User;
 use Illuminate\Validation\Rule;
@@ -32,7 +33,10 @@ class RegisterController extends Controller
 
         session()->flash('success', 'Your account has been created.');
         $user = User::create($attributes);
-        Role_user::create(['1',$user->id]);
+        Role_user::create([
+            'role_id'=>Role::where('designation','Devloper')->first()->id,
+            'user_id'=>$user->id
+        ]);
         Auth::login($user);
         return redirect('/dashboard');
     }

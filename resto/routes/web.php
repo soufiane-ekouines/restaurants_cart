@@ -46,6 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('laravel-examples/user-management');
 	// })->name('user-management');
     Route::get('user-management',[UsersController::class,'index'])->name('user-management');
+    // Route::get('user-create',[UsersController::class,'create'])->name('user-create');
+    Route::resource('user',UsersController::class);
+
 
 	Route::get('tables', function () {
 		return view('tables');

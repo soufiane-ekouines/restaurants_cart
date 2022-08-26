@@ -82,7 +82,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Tables</span>
+          <span class="nav-link-text ms-1">category management</span>
         </a>
       </li>
       <li class="nav-item">
@@ -102,7 +102,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Billing</span>
+          <span class="nav-link-text ms-1">Product management</span>
         </a>
       </li>
       <li class="nav-item">
@@ -123,7 +123,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Virtual Reality</span>
+          <span class="nav-link-text ms-1">Cart management</span>
         </a>
       </li>
       <li class="nav-item">
@@ -214,8 +214,8 @@
         </a>
       </li>
       <li class="nav-link mb-0">
-        <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
-            Upgrade to PRO</a>
+        <a href="soufianeekouines.vercel.app/" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
+            get one</a>
       </li>
     </ul>
   </div>

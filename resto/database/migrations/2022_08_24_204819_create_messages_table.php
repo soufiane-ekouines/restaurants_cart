@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('subject');
             $table->string('importent');
             $table->string('message');
+            $table->boolean('read');
             $table->foreignId('userSend_id')->constrained('users','id');
             $table->foreignId('userGet_id')->constrained('users','id');
             $table->timestamps();
-            
+
         });
     }
 
