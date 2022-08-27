@@ -46,9 +46,21 @@
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                @if (Auth()->user()->role->role->designation=='Developer')
+                                <div class="form-group">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="role_id">
+                                        @foreach ($roles as $role)
+                                          <option value="{{ $role->id }}">{{ $role->designation }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('desc')
+                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                @endif
                                 <input type="text" class="form-control" placeholder="user_id" name="user_id"
                                     id="user_id" aria-label="user_id" aria-describedby="user_id"
-                                    value="{{ old('user_id') }}" value="{{ Auth()->user()->id }}" hidden>
+                                     value="{{ Auth()->user()->id }}" hidden>
 
                             </div>
                             <div class="row">

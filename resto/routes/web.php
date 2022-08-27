@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CatController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -46,13 +47,17 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('laravel-examples/user-management');
 	// })->name('user-management');
     Route::get('user-management',[UsersController::class,'index'])->name('user-management');
-    // Route::get('user-create',[UsersController::class,'create'])->name('user-create');
+    Route::get('user-edit\{id}',[UsersController::class,'edit_user'])->name('user-edit');
     Route::resource('user',UsersController::class);
+    Route::resource('category',CatController::class);
 
+	// Route::get('category-management', function () {
+	// 	return view('tables');
+	// })->name('category-management');
 
-	Route::get('tables', function () {
-		return view('tables');
-	})->name('tables');
+    Route::get('product', function () {
+		return view('product');
+	})->name('product');
 
     Route::get('virtual-reality', function () {
 		return view('virtual-reality');

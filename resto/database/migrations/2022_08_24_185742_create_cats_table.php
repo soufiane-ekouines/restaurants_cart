@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('cats', function (Blueprint $table) {
             $table->id();
             $table->string('designation');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

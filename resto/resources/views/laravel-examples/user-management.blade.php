@@ -78,8 +78,8 @@
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                                             </td>
-                                            <td class="text-center display-flex">
-                                                <a href="{{ route('user.edit',$user->id) }}" class="mx-3  btn btn-outline" data-bs-toggle="tooltip"
+                                            <td class="text-center align-content">
+                                                <a href="{{ route('user-edit',$user->id) }}" class="mx-3  btn btn-outline" data-bs-toggle="tooltip"
                                                     data-bs-original-title="Edit user">
                                                     <i class="fas fa-user-edit text-secondary"></i>
                                                 </a>

@@ -38,9 +38,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // return view('laravel-examples.create-user');
-        $user = user::find(1);
-        return view('compts.update-user',compact('user'));
+        $roles = Role::get();
+        return view('laravel-examples.create-user',compact('roles'));
+        // $user = user::findOrFail(1);
+        // return view('compts.update-user',compact('user'));
 
     }
 
@@ -52,7 +53,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-
+       
         $attributes =$request->validate([
             'name' => ['required', 'max:50'],
             'Phone' => ['required', 'max:50'],
@@ -64,12 +65,15 @@ class UsersController extends Controller
             'agreement' => ['accepted']
         ]);
         $attributes['password'] = bcrypt($attributes['password'] );
-        $attributes['user_id'] =Auth()->user()->id;
-
-        // session()->flash('success', 'Your account has been created.');
+        $attributes['user_id'] = Auth()->user()->id;
         $user = User::create($attributes);
+        if(Auth()->user()->role->role->designation == 'Developer')
+        {
+            $role_id = $request['role_id'];
+        }else
+            $role_id = Role::where('designation','Employer')->first()->id;
         Role_user::create([
-            'role_id'=>Role::where('designation','Employer')->first()->id,
+            'role_id'=>$role_id,
             'user_id'=>$user->id
         ]);
         return redirect()->route('user-management');
@@ -90,12 +94,19 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\user  $user
-     * @return \Illuminate\Http\Response
+     
      */
-    public function edit($id)
+    public function edit_user($id)
     {
-        $user = user::find($id);
-        return view('compts.update-user',compact('user'));
+        $user = user::findOrFail($id);
+        $Login = Auth()->user();
+        if($Login->role->role->designation=='Developer' ||  $user->user_id == $Login->id)
+        {
+            return view('compts.update-user',compact('user'));
+        }else
+        {
+            return 404;
+        }
     }
 
     /**
@@ -105,9 +116,13 @@ class UsersController extends Controller
      * @param  \App\Models\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, user $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = user::findOrFail($id);
+        if($request['password']==null)
+        $request['password']=$user->password;
+       $user->update($request->all());
+        return redirect()->route('user.index');        
     }
 
     /**
@@ -118,7 +133,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-       User::find($id)->delete();
+       User::findOrFail($id)->delete();
         // session()->flash('success', 'the account has been deleted.');
        return redirect()->route('user-management');
     }

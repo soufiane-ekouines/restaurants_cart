@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CatRequest;
 use App\Models\Cat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CatController extends Controller
      */
     public function index()
     {
-        //
+        $category = Cat::get();
+        return view('tables',compact('category'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CatController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create-cat');
     }
 
     /**
@@ -33,9 +35,10 @@ class CatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CatRequest $request)
     {
-        //
+        Cat::create($request->validated);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -55,9 +58,14 @@ class CatController extends Controller
      * @param  \App\Models\Cat  $cat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cat $cat)
+    public function edit($id)
     {
-        //
+        $cat = Cat::findOrfail($id);
+        if(Auth()->user()->role->role == 'Developer' || $cat->user_id == Auth()->user()->id)
+        {
+            return view('category.edit-cat',compact('cat'));
+        }else
+        return 404;
     }
 
     /**
@@ -67,9 +75,10 @@ class CatController extends Controller
      * @param  \App\Models\Cat  $cat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cat $cat)
+    public function update(CatRequest $request, $id)
     {
-        //
+        Cat::findOrfail($id)->update($request->validated);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -78,8 +87,9 @@ class CatController extends Controller
      * @param  \App\Models\Cat  $cat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cat $cat)
+    public function destroy($id)
     {
-        //
+        Cat::findOrfail($id)->delete();
+        return redirect()->route('category.index');
     }
 }
