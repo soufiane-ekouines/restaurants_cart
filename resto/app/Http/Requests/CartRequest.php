@@ -13,7 +13,7 @@ class CartRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class CartRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'designation'=> 'required',
+            'user_id'=> 'required',
+            'tanks'=> 'required',
+            'name_wifi'=> 'nullable',
+            'password_wifi'=> 'nullable',
         ];
     }
 }

@@ -53,7 +53,7 @@
                                           <option value="{{ $role->id }}">{{ $role->designation }}</option>
                                         @endforeach
                                     </select>
-                                    @error('desc')
+                                    @error('role_id')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

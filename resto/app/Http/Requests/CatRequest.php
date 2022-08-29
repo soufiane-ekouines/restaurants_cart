@@ -24,7 +24,8 @@ class CatRequest extends FormRequest
     public function rules()
     {
         return [
-            'designation' => 'required,max:50'
+            'designation' => 'required|max:50',
+            'user_id' => 'required'
         ];
     }
 }

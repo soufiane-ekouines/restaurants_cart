@@ -43,29 +43,38 @@
                         </div>
                       </td>
                       <td>
-                        <p class="text-sm font-weight-bold mb-0">{{ $value->Price }}</p>
+                        <p class="text-sm font-weight-bold mb-0">{{ $value->Products->sum('prix') }} DH</p>
                       </td>
                       <td>
                         <span class="text-xs font-weight-bold">working</span>
                       </td>
+                     <?php  $number =(int)(($value->Products->count()/$NmProdict)*100); ?>
                       <td class="align-middle text-center">
                         <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">{{ $value->avg }}%</span>
+                          <span class="me-2 text-xs font-weight-bold">{{ $number }}%</span>
                           <div>
                             <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{ $number }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $number }}%;"></div>
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
+                      <td style="display: flex;justify-content: space-around" class="align-middle">
+                        <a href="{{ route('cat-edit', $value->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            Edit
+                        </a>
+                        <form action="{{ route('category.destroy', $value->id) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button style="border: none;padding: 0" type="submit" class="btn btn-outline-danger" data-toggle="tooltip" data-original-title="Edit user">
+                                    x
+                            </button>
+                        </form>
+
                       </td>
-                    </tr>  
+                    </tr>
                     @empty
-                        
+                    <p>No content Add Category</p>
                     @endforelse
 
 
@@ -78,5 +87,5 @@
       </div>
     </div>
   </main>
-  
+
   @endsection

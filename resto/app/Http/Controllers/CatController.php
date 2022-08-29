@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CatRequest;
 use App\Models\Cat;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CatController extends Controller
@@ -15,8 +16,9 @@ class CatController extends Controller
      */
     public function index()
     {
-        $category = Cat::get();
-        return view('tables',compact('category'));
+        $category = Cat::with('Products')->get();
+        $NmProdict = Product::count();
+        return view('tables',compact('category','NmProdict'));
     }
 
     /**
@@ -37,7 +39,7 @@ class CatController extends Controller
      */
     public function store(CatRequest $request)
     {
-        Cat::create($request->validated);
+        Cat::create($request->validated());
         return redirect()->route('category.index');
     }
 
@@ -47,7 +49,7 @@ class CatController extends Controller
      * @param  \App\Models\Cat  $cat
      * @return \Illuminate\Http\Response
      */
-    public function show(Cat $cat)
+    public function show($id)
     {
         //
     }
@@ -58,7 +60,7 @@ class CatController extends Controller
      * @param  \App\Models\Cat  $cat
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit_cat($id)
     {
         $cat = Cat::findOrfail($id);
         if(Auth()->user()->role->role == 'Developer' || $cat->user_id == Auth()->user()->id)
@@ -77,7 +79,7 @@ class CatController extends Controller
      */
     public function update(CatRequest $request, $id)
     {
-        Cat::findOrfail($id)->update($request->validated);
+        Cat::findOrfail($id)->update($request->validated());
         return redirect()->route('category.index');
     }
 

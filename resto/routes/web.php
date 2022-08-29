@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -31,9 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
-	Route::get('billing', function () {
-		return view('billing');
-	})->name('billing');
+	// Route::get('billing', function () {
+	// 	return view('billing');
+	// })->name('billing');
+
 
 	Route::get('profile', function () {
 		return view('profile');
@@ -47,17 +50,24 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('laravel-examples/user-management');
 	// })->name('user-management');
     Route::get('user-management',[UsersController::class,'index'])->name('user-management');
-    Route::get('user-edit\{id}',[UsersController::class,'edit_user'])->name('user-edit');
+    Route::get('user-edit/{id}',[UsersController::class,'edit_user'])->name('user-edit');
     Route::resource('user',UsersController::class);
     Route::resource('category',CatController::class);
+    Route::get('cat-edit/{id}',[CatController::class,'edit_cat'])->name('cat-edit');
+    Route::resource('product',ProductController::class);
+    Route::get('product-edit/{id}',[ProductController::class,'edit_product'])->name('product-edit');
+    Route::resource('card', CartController::class);
+    Route::get('edit_cart',[CartController::class,'edit_cart'])->name('edit_cart');
+
+
 
 	// Route::get('category-management', function () {
 	// 	return view('tables');
 	// })->name('category-management');
 
-    Route::get('product', function () {
-		return view('product');
-	})->name('product');
+    // Route::get('product', function () {
+	// 	return view('product');
+	// })->name('product');
 
     Route::get('virtual-reality', function () {
 		return view('virtual-reality');

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartRequest;
+use App\Models\B;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -14,7 +18,29 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = Cart::where('user_id',Auth()->user()->id)->first();
+        // dd();
+
+        if($cart)
+            {
+                $month = Product::select(DB::raw("month(b_s.created_at) as month , year(b_s.created_at) as year"),DB::raw("sum(products.prix*b_s.qte) as total"),DB::raw("sum(b_s.qte) as qteb"))
+                ->join('b_s','b_s.product_id','=','products.id')
+                ->where('b_s.user_id',Auth()->user()->id)
+                ->groupby(DB::raw("month(b_s.created_at),year(b_s.created_at)"))
+                ->get();
+
+                $day = Product::select(DB::raw("b_s.created_at as day,products.designation,(products.prix*b_s.qte) as total"))->join('b_s','b_s.product_id','=','products.id')
+                ->where('b_s.user_id',Auth()->user()->id)
+                ->where('b_s.created_at',today())
+                ->groupby(DB::raw("b_s.created_at,products.designation,products.prix*b_s.qte"))
+                ->get();
+            //    dd($day);
+                $B=B::totaltoday();
+                $M=B::totalmonth();             
+                return view('billing',compact('cart','B','M','day','month'));
+            }
+        else
+            return view('cart.create-cart');
     }
 
     /**
@@ -22,10 +48,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +59,10 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CartRequest $request)
     {
-        //
+        Cart::create($request->validated());
+        return redirect()->route('card.index');
     }
 
     /**
@@ -44,10 +71,10 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +82,15 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $cart)
+    // public function edit($id)
+    // {
+    //     //
+    // }
+
+    public function edit_cart()
     {
-        //
+        $cart = Cart::where('user_id',Auth()->user()->id)->first();
+        return view('cart.edit-cart',compact('cart'));
     }
 
     /**
@@ -67,9 +100,10 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(CartRequest $request, $id)
     {
-        //
+        Cart::findOrfail($id)->update($request->validated());
+        return redirect()->route('card.index');
     }
 
     /**
@@ -78,8 +112,9 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
+    // public function destroy($id)
+    // {
+    //     Cart::findOrfail($id)->delete();
+    //     return redirect()->route('card.index');
+    // }
 }

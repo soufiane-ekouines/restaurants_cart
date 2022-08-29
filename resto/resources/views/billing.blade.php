@@ -12,20 +12,20 @@
                 <span class="mask bg-gradient-dark"></span>
                 <div class="card-body position-relative z-index-1 p-3">
                   <i class="fas fa-wifi text-white p-2"></i>
-                  <h5 class="text-white mt-4 mb-5 pb-2">4562&nbsp;&nbsp;&nbsp;1122&nbsp;&nbsp;&nbsp;4594&nbsp;&nbsp;&nbsp;7852</h5>
+                  <h5 class="text-white mt-4 mb-5 pb-2">{{ $cart->designation }}</h5>
                   <div class="d-flex">
                     <div class="d-flex">
                       <div class="me-4">
-                        <p class="text-white text-sm opacity-8 mb-0">Card Holder</p>
-                        <h6 class="text-white mb-0">Jack Peterson</h6>
+                        <p class="text-white text-sm opacity-8 mb-0">{{ $cart->tanks }}</p>
+                        {{-- <h6 class="text-white mb-0">Jack Peterson</h6> --}}
                       </div>
                       <div>
-                        <p class="text-white text-sm opacity-8 mb-0">Expires</p>
-                        <h6 class="text-white mb-0">11/22</h6>
+                        <p class="text-white text-sm opacity-8 mb-0">{{ $cart->name_wifi }}</p>
+                        <h6 class="text-white mb-0">{{ $cart->password_wifi }}</h6>
                       </div>
                     </div>
                     <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                      <img class="w-60 mt-2" src="../assets/img/logos/mastercard.png" alt="logo">
+                      {{-- <img class="w-60 mt-2" src="../assets/img/logos/mastercard.png" alt="logo"> --}}
                     </div>
                   </div>
                 </div>
@@ -42,10 +42,10 @@
                     </div>
                   </div>
                   <div class="card-body pt-0 p-3 text-center">
-                    <h6 class="text-center mb-0">Salary</h6>
+                    <h6 class="text-center mb-0">daily</h6>
                     <span class="text-xs">Belong Interactive</span>
                     <hr class="horizontal dark my-3">
-                    <h5 class="mb-0">+$2000</h5>
+                    <h5 class="mb-0">+${{ $B }}</h5>
                   </div>
                 </div>
               </div>
@@ -57,10 +57,10 @@
                     </div>
                   </div>
                   <div class="card-body pt-0 p-3 text-center">
-                    <h6 class="text-center mb-0">Paypal</h6>
+                    <h6 class="text-center mb-0">monthly</h6>
                     <span class="text-xs">Freelance Payment</span>
                     <hr class="horizontal dark my-3">
-                    <h5 class="mb-0">$455.00</h5>
+                    <h5 class="mb-0">${{ $M }}</h5>
                   </div>
                 </div>
               </div>
@@ -114,56 +114,18 @@
           </div>
           <div class="card-body p-3 pb-0">
             <ul class="list-group">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                @foreach ($month as $item)
+               <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                 <div class="d-flex flex-column">
-                  <h6 class="mb-1 text-dark font-weight-bold text-sm">March, 01, 2020</h6>
-                  <span class="text-xs">#MS-415646</span>
+                  <h6 class="mb-1 text-dark font-weight-bold text-sm">{{ $item->month }}/{{ $item->year }}</h6>
+                  <span class="text-xs">{{ $item->qteb }} products</span>
                 </div>
                 <div class="d-flex align-items-center text-sm">
-                  $180
+                  {{ $item->total }} DH
                   <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
                 </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="text-dark mb-1 font-weight-bold text-sm">February, 10, 2021</h6>
-                  <span class="text-xs">#RV-126749</span>
-                </div>
-                <div class="d-flex align-items-center text-sm">
-                  $250
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="text-dark mb-1 font-weight-bold text-sm">April, 05, 2020</h6>
-                  <span class="text-xs">#FB-212562</span>
-                </div>
-                <div class="d-flex align-items-center text-sm">
-                  $560
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="text-dark mb-1 font-weight-bold text-sm">June, 25, 2019</h6>
-                  <span class="text-xs">#QW-103578</span>
-                </div>
-                <div class="d-flex align-items-center text-sm">
-                  $120
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
-                  <span class="text-xs">#AR-803481</span>
-                </div>
-                <div class="d-flex align-items-center text-sm">
-                  $300
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                </div>
-              </li>
+              </li> 
+                @endforeach
             </ul>
           </div>
         </div>
@@ -179,38 +141,14 @@
             <ul class="list-group">
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                 <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Oliver Liam</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                  <h6 class="mb-3 text-sm">cart Payment</h6>
+                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">{{ $cart->designation }}</span></span>
+                  <span class="mb-2 text-xs">Tanks: <span class="text-dark ms-sm-2 font-weight-bold">{{ $cart->tanks }}</span></span>
+                  <span class="text-xs">wifi: <span class="text-dark ms-sm-2 font-weight-bold">{{ $cart->name_wifi }}\{{ $cart->password_wifi }}</span></span>
                 </div>
                 <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Lucas Harper</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                </div>
-                <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Ethan James</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                </div>
-                <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                  {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                  <a class="btn btn-link text-dark px-3 mb-0" href="{{ route('edit_cart') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                 </div>
               </li>
             </ul>
@@ -226,94 +164,34 @@
               </div>
               <div class="col-md-6 d-flex justify-content-end align-items-center">
                 <i class="far fa-calendar-alt me-2"></i>
-                <small>23 - 30 March 2020</small>
+                <small>{{ today() }}</small>
               </div>
             </div>
           </div>
           <div class="card-body pt-4 p-3">
             <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
-            <ul class="list-group">
+              <ul class="list-group">
+            @foreach ($day as $item)
               <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
+                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                    <span class="text-xs">27 March 2020, at 12:30 PM</span>
+                    <h6 class="mb-1 text-dark text-sm">{{ $item->designation }}</h6>
+                    <span class="text-xs">{{ $item->day }}</span>
                   </div>
                 </div>
                 <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                  - $ 2,500
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Apple</h6>
-                    <span class="text-xs">27 March 2020, at 04:30 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 2,000
+                  - $ {{ $item->total }}
                 </div>
               </li>
             </ul>
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6>
-            <ul class="list-group">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Stripe</h6>
-                    <span class="text-xs">26 March 2020, at 13:45 PM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 750
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
-                    <span class="text-xs">26 March 2020, at 12:30 PM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 1,000
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
-                    <span class="text-xs">26 March 2020, at 08:30 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 2,500
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Webflow</h6>
-                    <span class="text-xs">26 March 2020, at 05:00 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-dark text-sm font-weight-bold">
-                  Pending
-                </div>
-              </li>
-            </ul>
+            @endforeach
+
           </div>
         </div>
       </div>
     </div>
   </div>
- 
+
 @endsection
 

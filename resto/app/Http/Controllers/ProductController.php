@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Cat;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth()->user()->role->role->designation == 'Developer')
+        {
+        $products = Product::with(['cat','user'])->get();
+            return view('product',compact('products'));
+        }else
+        {
+        $products = Product::where('user_id',Auth()->user()->id)->with(['cat','user'])->get();
+          return view('product',compact('products'));
+        }
     }
 
     /**
@@ -24,7 +34,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $cat = Cat::get();
+        return view('product.create-product',compact('cat'));
     }
 
     /**
@@ -33,9 +44,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        Product::create($request->validated());
+        return redirect()->route('product.index');
     }
 
     /**
@@ -44,7 +56,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
     }
@@ -55,9 +67,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit_product($id)
     {
-        //
+        $product = Product::with('cat')->findOrfail($id);
+        $cat = Cat::get();
+        if(Auth()->user()->role->role->designation == 'Developer' || $product->user_id == Auth()->user()->id)
+        {
+            return view('product.edit-product',compact('product','cat'));
+        }else return 404;
     }
 
     /**
@@ -67,9 +84,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        Product::findOrfail($id)->update($request->validated());
+        return redirect()->route('product.index');
     }
 
     /**
@@ -78,8 +96,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::findOrfail($id)->delete();
+        return redirect()->route('product.index');
     }
 }

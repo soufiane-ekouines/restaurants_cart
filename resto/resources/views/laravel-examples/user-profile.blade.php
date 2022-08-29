@@ -170,6 +170,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="user-password" class="form-control-label">{{ __('password') }}</label>
+                            <div class="@error('user.password')border border-danger rounded-3 @enderror">
+                                <input class="form-control" value="{{ old('password') }}" type="text" placeholder="password" id="user-password" name="password">
+                                    @error('password')
+                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="about">{{ 'About Me' }}</label>
                         <div class="@error('user.about')border border-danger rounded-3 @enderror">
