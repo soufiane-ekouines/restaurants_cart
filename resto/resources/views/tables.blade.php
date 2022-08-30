@@ -74,7 +74,6 @@
                       </td>
                     </tr>
                     @empty
-                    <p>No content Add Category</p>
                     @endforelse
 
 

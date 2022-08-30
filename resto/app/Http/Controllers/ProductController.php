@@ -34,7 +34,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $cat = Cat::get();
+        if(Auth()->user()->role->role == 'Developer')
+        {
+            $cat = Cat::get();
+        }else{
+            $cat = Cat::where('user_id',Auth()->user()->id)->get();
+        }
         return view('product.create-product',compact('cat'));
     }
 

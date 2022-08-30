@@ -29,9 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
+
 
 	// Route::get('billing', function () {
 	// 	return view('billing');
@@ -58,7 +56,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product-edit/{id}',[ProductController::class,'edit_product'])->name('product-edit');
     Route::resource('card', CartController::class);
     Route::get('edit_cart',[CartController::class,'edit_cart'])->name('edit_cart');
+    Route::get('dashboard',[HomeController::class,'home'])->name('dashboard');
 
+
+	// Route::get('dashboard', function () {
+	// 	return view('dashboard');
+	// })->name('dashboard');
 
 
 	// Route::get('category-management', function () {

@@ -180,8 +180,8 @@
                     <span class="text-xs">{{ $item->day }}</span>
                   </div>
                 </div>
-                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                  - $ {{ $item->total }}
+                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                   +$ {{ $item->total }}
                 </div>
               </li>
             </ul>

@@ -6,6 +6,7 @@ use App\Http\Requests\CartRequest;
 use App\Models\B;
 use App\Models\Cart;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,18 +26,18 @@ class CartController extends Controller
             {
                 $month = Product::select(DB::raw("month(b_s.created_at) as month , year(b_s.created_at) as year"),DB::raw("sum(products.prix*b_s.qte) as total"),DB::raw("sum(b_s.qte) as qteb"))
                 ->join('b_s','b_s.product_id','=','products.id')
-                ->where('b_s.user_id',Auth()->user()->id)
+                ->where('products.user_id',Auth()->user()->id)
                 ->groupby(DB::raw("month(b_s.created_at),year(b_s.created_at)"))
                 ->get();
 
                 $day = Product::select(DB::raw("b_s.created_at as day,products.designation,(products.prix*b_s.qte) as total"))->join('b_s','b_s.product_id','=','products.id')
-                ->where('b_s.user_id',Auth()->user()->id)
-                ->where('b_s.created_at',today())
+                ->where('products.user_id',Auth()->user()->id)
+                ->whereDate('b_s.created_at', Carbon::today()->toDateString())
                 ->groupby(DB::raw("b_s.created_at,products.designation,products.prix*b_s.qte"))
                 ->get();
             //    dd($day);
                 $B=B::totaltoday();
-                $M=B::totalmonth();             
+                $M=B::totalmonth();
                 return view('billing',compact('cart','B','M','day','month'));
             }
         else

@@ -16,8 +16,15 @@ class CatController extends Controller
      */
     public function index()
     {
-        $category = Cat::with('Products')->get();
-        $NmProdict = Product::count();
+        if(Auth()->user()->role->role == 'Developer')
+        {
+            $category = Cat::with('Products')->get();
+            $NmProdict = Product::count();
+        }else{
+            $category = Cat::where('user_id',Auth()->user()->id)->with('Products')->get();
+            $NmProdict = Product::where('user_id',Auth()->user()->id)->count();
+        }
+
         return view('tables',compact('category','NmProdict'));
     }
 
