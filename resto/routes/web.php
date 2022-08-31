@@ -36,9 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
 	// })->name('billing');
 
 
-	Route::get('profile', function () {
-		return view('profile');
-	})->name('profile');
+
+
 
 	Route::get('rtl', function () {
 		return view('rtl');
@@ -57,8 +56,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('card', CartController::class);
     Route::get('edit_cart',[CartController::class,'edit_cart'])->name('edit_cart');
     Route::get('dashboard',[HomeController::class,'home'])->name('dashboard');
+    Route::get('profile',[UsersController::class,'profile'])->name('profile');
 
 
+    // Route::get('profile', function () {
+	// 	return view('profile');
+	// })->name('profile');
 	// Route::get('dashboard', function () {
 	// 	return view('dashboard');
 	// })->name('dashboard');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Role;
 use App\Models\Role_user;
 use App\Models\user;
@@ -53,7 +54,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $attributes =$request->validate([
             'name' => ['required', 'max:50'],
             'Phone' => ['required', 'max:50'],
@@ -90,12 +91,8 @@ class UsersController extends Controller
        dd('k');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\user  $user
-     
-     */
+
+
     public function edit_user($id)
     {
         $user = user::findOrFail($id);
@@ -107,6 +104,12 @@ class UsersController extends Controller
         {
             return 404;
         }
+    }
+
+    public function profile()
+    {
+        $products = Product::where('user_id',Auth()->user()->id)->limit(3)->get();
+        return view('profile',compact('products'));
     }
 
     /**
@@ -122,7 +125,7 @@ class UsersController extends Controller
         if($request['password']==null)
         $request['password']=$user->password;
        $user->update($request->all());
-        return redirect()->route('user.index');        
+        return redirect()->route('user.index');
     }
 
     /**
