@@ -12,8 +12,7 @@
                     <div>
                         <h5 class="mb-0">All Message</h5>
                     </div>
-                    <a href="{{ route('Message.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
-                        type="button">+&nbsp; New Message</a>
+
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -41,27 +40,28 @@
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
-                            <p class="text-xs text-secondary mb-0">{{ $item->name }}</p>
+                            <p class="text-xs text-secondary mb-0">{{ $item->role->role->designation }}</p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">{{ $item->Lastmessage }} DH</p>
+                        @if ($item->last_get_send->count()!=0 && $item->last_get->count()!=0)
+                                <p class="text-xs font-weight-bold mb-0">{{($item->last_get_send[0]->created_at>$item->last_get[0]->created_at)? $item->last_get_send[0]->message : $item->last_get[0]->message;}}</p>
+                            @elseif($item->last_get_send->count()!=0)
+                                 <p class="text-xs font-weight-bold mb-0">{{ $item->last_get_send[0]->message }}</p>
+                            @elseif($item->last_get->count()!=0)
+                                 <p class="text-xs font-weight-bold mb-0">{{ $item->last_get[0]->message }}</p>
+
+                            @else
+                                 <p class="text-xs font-weight-bold mb-0">No Message</p>
+                        @endif
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ $Message->message->count() }}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $item->messagesendNoread->count() }}</span>
                       </td>
                       <td style="display: flex;justify-content: space-around;padding: 14px" class="align-middle">
-                        <a href="{{ route('Message-edit', $Message->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                        </a>
-                        <form action="{{ route('Message.destroy', $Message->id) }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button style="border: none;padding: 0" type="submit" class="btn btn-outline-danger" data-toggle="tooltip" data-original-title="Edit user">
-                                    x
-                            </button>
-                        </form>
+                        <a href="{{ route('message.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
+                        type="button">+&nbsp; send Message</a>
 
                       </td>
                     </tr>

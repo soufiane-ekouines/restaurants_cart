@@ -5,6 +5,7 @@ use App\Http\Controllers\CatController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
@@ -57,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit_cart',[CartController::class,'edit_cart'])->name('edit_cart');
     Route::get('dashboard',[HomeController::class,'home'])->name('dashboard');
     Route::get('profile',[UsersController::class,'profile'])->name('profile');
+    Route::resource('message',MessageController::class);
 
 
     // Route::get('profile', function () {

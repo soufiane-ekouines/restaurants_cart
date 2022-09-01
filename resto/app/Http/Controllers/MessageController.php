@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -14,7 +15,10 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $auth = Auth()->user();
+        // $employer = Message::select()->where('userGet_id',$auth->id);
+        $emplyee =User::with(['role.role','messagesendNoread','message_get','last_get_send','last_get_send'])->where('user_id',$auth->id)->get();
+        return view('Message.message',compact('emplyee'));
     }
 
     /**

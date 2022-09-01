@@ -195,17 +195,17 @@
             <div class="card-body p-3">
               <ul class="list-group">
                 @forelse ($Message as $item)
-                    
+
                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                   <div class="avatar me-3">
                     <img src="../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
                   </div>
                   <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">{{ $item->user->name }}</h6>
-                    <p class="mb-0 text-xs">{{ $item->message }}..</p>
+                    <p class="mb-0 text-xs">{{ substr($item->message,0,27) }}..</p>
                   </div>
                   <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                </li>   
+                </li>
                 @empty
                 <p class="mb-0 text-xs">No message</p>
                 @endforelse

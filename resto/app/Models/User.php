@@ -50,4 +50,31 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role_user::class);
     }
+
+    public function messagesendNoread()
+    {
+        return $this->hasMany(Message::class,'userSend_id')->where('userGet_id',Auth()->id())->where('read_',false);
+    }
+
+    public function message_get()
+    {
+        return $this->hasMany(Message::class,'userGet_id');
+    }
+
+    public function last_get_send()
+    {
+        return $this->hasMany(Message::class,'userSend_id')->orderBy('created_at','DESC');
+    }
+    public function last_get()
+    {
+        return $this->hasMany(Message::class,'userGet_id')->orderBy('created_at','DESC');
+    }
+    public function Lastmessage()
+    {
+        return Message::where('userSend_id',$this->id)
+                        ->Orwhere('userGet_id',$this->id)
+                        ->orderBy('created_at','DESC')
+                        ->first();
+    }
+
 }

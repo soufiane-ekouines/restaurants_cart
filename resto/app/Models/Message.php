@@ -12,18 +12,18 @@ class Message extends Model
         'subject',
         'importent',
         'message',
-        'read',
+        'read_',
         'userSend_id',
         'userGet_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo('user','userGet_id');
+        return $this->belongsTo(user::class,'userGet_id');
     }
 
     public function userSend()
     {
-        return $this->belongsTo('user','userSend_id');
+        return $this->belongsTo(user::class,'userSend_id');
     }
 }

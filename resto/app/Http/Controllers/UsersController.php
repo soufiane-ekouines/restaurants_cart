@@ -110,7 +110,7 @@ class UsersController extends Controller
     public function profile()
     {
         $products = Product::where('user_id',Auth()->user()->id)->limit(3)->get();
-        $Message = Message::where('userGet_id',Auth()->user()->id)->where('read',false)->limit(5)->get();
+        $Message = Message::where('userGet_id',Auth()->user()->id)->where('read_',false)->limit(5)->get();
         return view('profile',compact('products','Message'));
     }
 
