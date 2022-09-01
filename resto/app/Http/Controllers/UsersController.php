@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Role_user;
@@ -109,7 +110,8 @@ class UsersController extends Controller
     public function profile()
     {
         $products = Product::where('user_id',Auth()->user()->id)->limit(3)->get();
-        return view('profile',compact('products'));
+        $Message = Message::where('userGet_id',Auth()->user()->id)->where('read',false)->limit(5)->get();
+        return view('profile',compact('products','Message'));
     }
 
     /**
