@@ -24,7 +24,7 @@ class InfoUserController extends Controller
             'Phone' => ['required', 'max:50'],
             'Adresse' => ['required', 'max:50'],
             'desc' => ['required', 'max:50'],
-            'password' => ['required', 'min:5', 'max:20'],
+            'password' => ['nullable', 'min:5', 'max:20'],
             // 'agreement' => ['accepted'],
             'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
         ]);

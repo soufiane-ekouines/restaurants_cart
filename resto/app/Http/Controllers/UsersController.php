@@ -123,10 +123,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $attributes = $request->validate([
+            'name' => ['required', 'max:50'],
+            'Phone' => ['required', 'max:50'],
+            'Adresse' => ['required', 'max:50'],
+            'desc' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'max:50'],
+            'password' => ['nullable', 'min:5', 'max:20'],
+            'agreement' => ['accepted']
+        ]);
+
         $user = user::findOrFail($id);
-        if($request['password']==null)
-        $request['password']=$user->password;
-       $user->update($request->all());
+        if($attributes['password']==null)
+        $attributes['password']=$user->password;
+       $user->update($attributes);
         return redirect()->route('user.index');
     }
 

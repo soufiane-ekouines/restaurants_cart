@@ -201,10 +201,10 @@
                     <img src="../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
                   </div>
                   <div class="d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="mb-0 text-sm">{{ $item->user->name }}</h6>
+                    <h6 class="mb-0 text-sm">{{ $item->userSend->name }}</h6>
                     <p class="mb-0 text-xs">{{ substr($item->message,0,27) }}..</p>
                   </div>
-                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="{{ route('message.show',$item->user->id) }}">Reply</a>
+                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="{{ route('message.show',$item->userSend->id) }}">Reply</a>
                 </li>
                 @empty
                 <p class="mb-0 text-xs">No message</p>
