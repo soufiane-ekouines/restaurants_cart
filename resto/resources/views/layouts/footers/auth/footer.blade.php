@@ -6,7 +6,7 @@
                     © <script>
                         document.write(new Date().getFullYear())
                     </script>, made with <i class="fa fa-heart"></i> by
-                    <a href="soufianeekouines.vercel.app/" class="font-weight-bold" target="_blank">soufiane ekouines</a>&amp; <a style="color: #252f40;" href="https://omarelamrani.vercel.app/" class="font-weight-bold ml-1" target="_blank">omar</a>
+                    <a href="https://soufianeekouines.vercel.app/" class="font-weight-bold" target="_blank">soufiane ekouines</a>&amp; <a style="color: #252f40;" href="https://omarelamrani.vercel.app/" class="font-weight-bold ml-1" target="_blank">omar</a>
                     for a better web.
                 </div>
             </div>

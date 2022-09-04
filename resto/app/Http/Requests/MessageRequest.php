@@ -13,7 +13,7 @@ class MessageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+        'subject'=>['string'],
+        'importent'=>['string'],
+        'message'=>['required'],
+        'read_'=>['boolean'],
+        'userSend_id'=>['required'],
+        'userGet_id'=>['required'],
         ];
     }
 }

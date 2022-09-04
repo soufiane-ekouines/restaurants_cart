@@ -204,7 +204,7 @@
                     <h6 class="mb-0 text-sm">{{ $item->user->name }}</h6>
                     <p class="mb-0 text-xs">{{ substr($item->message,0,27) }}..</p>
                   </div>
-                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="{{ route('message.show',$item->user->id) }}">Reply</a>
                 </li>
                 @empty
                 <p class="mb-0 text-xs">No message</p>

@@ -20,10 +20,10 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Designation</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Prix</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">QTE</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">user</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">last message</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">New message</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">action</th>
                       @if (Auth()->user()->role->role->designation == 'Developer')
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">admin</th>
                       @endif
@@ -60,7 +60,7 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $item->messagesendNoread->count() }}</span>
                       </td>
                       <td style="display: flex;justify-content: space-around;padding: 14px" class="align-middle">
-                        <a href="{{ route('message.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
+                        <a href="{{ route('message.show',$item->id) }}" class="btn bg-gradient-primary btn-sm mb-0"
                         type="button">+&nbsp; send Message</a>
 
                       </td>
