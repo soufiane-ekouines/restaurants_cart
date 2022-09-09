@@ -95,9 +95,9 @@ class CartController extends Controller
                 'products' => $products,
                 'month' => $month
             ];
-            // $date = now();
+            $date = now();
             $pdf = PDF::loadView('product.pdfproductm', $data);
-            return $pdf->download('salesg.pdf');
+            return $pdf->download('sales_in'.$month.'_today'.$date.'.pdf');
         // return view('product.pdfproductm',compact('products','month'));
     }
 }
