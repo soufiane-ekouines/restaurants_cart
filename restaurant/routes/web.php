@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard',[HomeController::class,'home'])->name('dashboard');
     Route::get('profile',[UsersController::class,'profile'])->name('profile');
     Route::resource('message',MessageController::class);
+    Route::get('Product_Month',[CartController::class,'productm'])->name('Product_Month');
+    Route::get('pdf_productmy/{month}',[CartController::class,'productmy'])->name('pdf_productmy');
+
+
 
 
     // Route::get('profile', function () {

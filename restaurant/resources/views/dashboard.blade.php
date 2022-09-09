@@ -245,7 +245,7 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $item->user->name }}">
+                      <a href="{{ route('user-edit',$item->user_id) }}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $item->user->name }}">
                         <img src="../assets/img/team-2.jpg" alt="team2">
                       </a>
                     </div>

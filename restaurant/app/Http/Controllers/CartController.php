@@ -9,25 +9,21 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $cart = Cart::where('user_id',Auth()->user()->id)->first();
-        // dd();
 
         if($cart)
             {
-                $month = Product::select(DB::raw("month(b_s.created_at) as month , year(b_s.created_at) as year"),DB::raw("sum(products.prix*b_s.qte) as total"),DB::raw("sum(b_s.qte) as qteb"))
+                $month = Product::select(DB::raw("DATE_FORMAT(b_s.created_at, '%Y-%m') as pdate"),DB::raw("sum(products.prix*b_s.qte) as total"),DB::raw("sum(b_s.qte) as qteb"))
                 ->join('b_s','b_s.product_id','=','products.id')
                 ->where('products.user_id',Auth()->user()->id)
-                ->groupby(DB::raw("month(b_s.created_at),year(b_s.created_at)"))
+                ->groupby('pdate')
                 ->get();
 
                 $day = Product::select(DB::raw("b_s.created_at as day,products.designation,(products.prix*b_s.qte) as total"))->join('b_s','b_s.product_id','=','products.id')
@@ -44,49 +40,15 @@ class CartController extends Controller
             return view('cart.create-cart');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     //
-    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CartRequest $request)
     {
         Cart::create($request->validated());
         return redirect()->route('card.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit($id)
-    // {
-    //     //
-    // }
+
 
     public function edit_cart()
     {
@@ -94,28 +56,48 @@ class CartController extends Controller
         return view('cart.edit-cart',compact('cart'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(CartRequest $request, $id)
     {
         Cart::findOrfail($id)->update($request->validated());
         return redirect()->route('card.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
     // public function destroy($id)
     // {
     //     Cart::findOrfail($id)->delete();
     //     return redirect()->route('card.index');
     // }
+
+    public function productm()
+    {
+
+        $month = Product::select(DB::raw("DATE_FORMAT(b_s.created_at, '%Y-%m') as pdate"),DB::raw("sum(products.prix*b_s.qte) as total"),DB::raw("sum(b_s.qte) as qteb"))
+        ->join('b_s','b_s.product_id','=','products.id')
+        ->where('products.user_id',Auth()->user()->id)
+        ->groupby('pdate')
+        ->get();
+
+        return view('product.productb',compact('month'));
+    }
+
+    public function productmy($month)
+    {
+        set_time_limit(300);
+        $products = Product::select(DB::raw("DATE_FORMAT(b_s.created_at, '%Y-%m') AS b_date,designation"),DB::raw('sum(products.prix*b_s.qte) as total ,  sum(b_s.qte) as number'))
+            ->join('b_s','b_s.product_id','=','products.id')
+            ->where('products.user_id',Auth()->id())
+            ->where(DB::raw("DATE_FORMAT(b_s.created_at, '%Y-%m')"),$month)
+            ->groupby("designation","b_date")
+            ->get();
+
+            $data = [
+                'products' => $products,
+                'month' => $month
+            ];
+            // $date = now();
+            $pdf = PDF::loadView('product.pdfproductm', $data);
+            return $pdf->download('salesg.pdf');
+        // return view('product.pdfproductm',compact('products','month'));
+    }
 }

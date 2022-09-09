@@ -87,10 +87,10 @@ class UsersController extends Controller
      * @param  \App\Models\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(user $user)
-    {
-       dd('k');
-    }
+    // public function show(user $user)
+    // {
+    //    dd('k');
+    // }
 
 
 
@@ -103,7 +103,7 @@ class UsersController extends Controller
             return view('compts.update-user',compact('user'));
         }else
         {
-            return 404;
+            return  404;
         }
     }
 
